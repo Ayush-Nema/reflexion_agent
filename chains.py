@@ -15,7 +15,7 @@ from schemas import AnswerQuestion
 install(show_locals=True)
 load_dotenv()
 
-llm = ChatOpenAI()
+llm = ChatOpenAI(model="gpt-4-turbo-preview")
 parser = JsonOutputToolsParser(return_id=True)
 parser_pydantic = PydanticToolsParser(tools=[AnswerQuestion])
 
