@@ -16,3 +16,8 @@ class AnswerQuestion(BaseModel):
     search_queries: List[str] = Field(
         description="1-3 search queries for researching improvements to address the critique of your current answer."
     )
+
+
+class ReviseAnswer(AnswerQuestion):
+    """Revise your answer as per original question"""
+    references: List[str] = Field(description="Citation from your updated answer")
