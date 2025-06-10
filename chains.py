@@ -33,7 +33,9 @@ Current time: {time}
         MessagesPlaceholder(variable_name="messages"),
         ("system", "Answer the user's question above using the required format."),
     ]
-).partial(time=lambda: datetime.datetime.now().isoformat(), )
+).partial(
+    time=lambda: datetime.datetime.now().isoformat(),
+)
 
 first_responder_prompt_template = actor_prompt_template.partial(
     first_instruction="Provide a detailed ~250 word answer."
@@ -53,8 +55,9 @@ revise_instructions = """Revise your answer using the new information.
 more than 250 words.
 """
 
-reviser = (actor_prompt_template.partial(first_instruction=revise_instructions)
-           | llm.bind_tools(tools=[ReviseAnswer], tool_choice="ReviseAnswer"))
+reviser = actor_prompt_template.partial(
+    first_instruction=revise_instructions
+) | llm.bind_tools(tools=[ReviseAnswer], tool_choice="ReviseAnswer")
 
 if __name__ == "__main__":
     human_message = HumanMessage(
